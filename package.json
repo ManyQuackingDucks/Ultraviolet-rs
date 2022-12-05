@@ -27,9 +27,11 @@
         "meriyah": "^4.3.3",
         "mime-db": "^1.51.0",
         "parse5": "^7.1.2",
+        "rslib": "file:pkg",
         "set-cookie-parser": "^2.4.8"
     },
     "devDependencies": {
+        "@wasm-tool/wasm-pack-plugin": "^1.6.0",
         "copy-webpack-plugin": "^11.0.0",
         "cross-env": "^7.0.3",
         "eslint": "^8.28.0",

@@ -1,3 +1,8 @@
 node_modules/
 dist/
 *.tgz
+
+# Added by cargo
+
+/target
+/Cargo.lock

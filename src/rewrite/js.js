@@ -2,7 +2,7 @@ import { parseScript } from 'meriyah';
 // import { parse } from 'acorn-hammerhead';
 import { generate } from 'esotope-hammerhead';
 import EventEmitter from 'events';
-
+import { rustsub } from 'rslib';
 class JS extends EventEmitter {
     constructor() {
         super();
@@ -56,7 +56,7 @@ class JS extends EventEmitter {
                 this.emit(node.type, node, meta, type);
             });
 
-            meta.changes.sort((a, b) => a.start - b.start || a.end - b.end);
+            meta.changes.sort((a, b) => rustsub(a.start,b.start) || rustsub(a.end, b.end));
 
             for (const change of meta.changes) {
                 if ('start' in change && typeof change.start === 'number')

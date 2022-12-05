@@ -2,6 +2,7 @@ import { fileURLToPath } from 'url';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import  WasmPackPlugin from "@wasm-tool/wasm-pack-plugin";
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -11,6 +12,10 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const config = {
     mode: isDevelopment ? 'development' : 'production',
     devtool: isDevelopment ? 'eval' : 'source-map',
+    experiments: {
+        asyncWebAssembly: true,
+        syncWebAssembly: true
+    },
     entry: {
         bundle: fileURLToPath(
             new URL('./src/rewrite/index.js', import.meta.url)
@@ -53,6 +58,9 @@ const config = {
     },
     plugins: [
         new ESLintPlugin(),
+        new WasmPackPlugin({
+            crateDirectory: "./", // Define where the root of the rust code is located (where the cargo.toml file is located)
+        }),
         new CopyPlugin({
             patterns: [
                 {
